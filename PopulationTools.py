@@ -27,11 +27,17 @@ def sample_pop_best(pop,size): #UNFINISHED
     scores = obj_score_pop(pop)
     return None
 
-def gen_individual(vectors,length): #UNFINISHED
+def gen_individual(vectors,length):
     return [length*'0' for x in range(vectors)]
 
-def gen_population(size,vectors,length): #UNFINISHED
+def gen_fittest_individual(vectors,length):
+    return [length*'1' for x in range(vectors)]
+
+def gen_population(size,vectors,length):
     return [gen_individual(vectors,length) for x in range(size)]
+
+def gen_fittest_population(size,vectors,length):
+    return [gen_fittest_individual(vectors,length) for x in range(size)]
 
 def gen_random_individual(vectors,length): #each bit in this individual starts randomised, instead of starting as all 0's
     return ["".join([(rnd.choice("01")) for x in range(length)]) for y in range(vectors)]
