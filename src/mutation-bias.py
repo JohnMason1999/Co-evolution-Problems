@@ -1,4 +1,5 @@
 #shows that under no evolutionary pressure our mutation drifts towards half of maximum fitness
+#maximum fitness is (vectors * scalar_length)/2
 
 import PopulationTools as poptools
 import statistics
