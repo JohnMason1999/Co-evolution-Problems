@@ -80,5 +80,6 @@ def fitness_proportionate_selection(population,population_scores,size):
             current += population_scores[i]
             if current >= selection_int:
                 selection = population[i]
+                break
         new_population.append(selection)
     return new_population
