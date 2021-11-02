@@ -68,3 +68,17 @@ def mutate_scalar(scalar,mutation_rate):
         else:
             new_scalar.append(char)
     return "".join(new_scalar)
+
+#takes scores as argument so method can be used with subjective or objective scoring
+def fitness_proportionate_selection(population,population_scores,size):
+    new_population = []
+    for x in range(size):
+        selection = []
+        selection_int = rnd.randint(0,sum(population_scores))
+        current = 0
+        for i in range(len(population)):
+            current += population_scores[i]
+            if current >= selection_int:
+                selection = population[i]
+        new_population.append(selection)
+    return new_population
