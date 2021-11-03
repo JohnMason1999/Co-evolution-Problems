@@ -76,7 +76,7 @@ def fitness_proportionate_selection(population,population_scores,size):
     new_population = []
     fitness_total = sum(population_scores)
     population_tuples = list(zip(population,population_scores))
-    population_tuples.sort(reverse=True,key=pop_score_key)
+    population_tuples.sort(reverse=True,key=lambda e: e[1])
 
     #add each individual to new population proportionally to their fitness
     current = 0
@@ -88,6 +88,3 @@ def fitness_proportionate_selection(population,population_scores,size):
             new_population.append(individual)
         current += proportionate_value
     return new_population
-
-def pop_score_key(pop_score):
-    return pop_score[1]
