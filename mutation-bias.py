@@ -17,5 +17,6 @@ for x in range(generations):
     fit_population = poptools.mutate_population(fit_population,mutation_rate)
 
  #shows average fitness of the populations
+print("maximum possible fitness: "+ str(vectors*scalar_length))
 print("unfit population average: "+str((statistics.mean(poptools.obj_score_pop(unfit_population)))))
 print("fit population average: "+str((statistics.mean(poptools.obj_score_pop(fit_population)))))
