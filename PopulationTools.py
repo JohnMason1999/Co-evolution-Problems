@@ -1,4 +1,6 @@
 import random as rnd
+import statistics
+import math
 
 def obj_score(individual):
     #a is an array of scalars represented by binary strings
@@ -69,16 +71,23 @@ def mutate_scalar(scalar,mutation_rate):
             new_scalar.append(char)
     return "".join(new_scalar)
 
-#takes scores as argument so method can be used with subjective or objective scoring
+#no random version, slight preference for higher fitness individuals
 def fitness_proportionate_selection(population,population_scores,size):
     new_population = []
-    for x in range(size):
-        selection = []
-        selection_int = rnd.randint(0,sum(population_scores))
-        current = 0
-        for i in range(len(population)):
-            current += population_scores[i]
-            if current >= selection_int:
-                selection = population[i]
-        new_population.append(selection)
+    fitness_total = sum(population_scores)
+    population_tuples = list(zip(population,population_scores))
+    population_tuples.sort(reverse=True,key=pop_score_key)
+
+    #add each individual to new population proportionally to their fitness
+    current = 0
+    for individual in population_tuples:
+        if current >= size:
+            break
+        proportionate_value = math.ceil((individual[1]/fitness_total)*size)
+        for x in range(proportionate_value):
+            new_population.append(individual)
+        current += proportionate_value
     return new_population
+
+def pop_score_key(pop_score):
+    return pop_score[1]
