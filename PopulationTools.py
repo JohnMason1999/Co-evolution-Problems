@@ -72,9 +72,12 @@ def mutate_scalar(scalar,mutation_rate):
     return "".join(new_scalar)
 
 #no random version, slight preference for higher fitness individuals
-def fitness_proportionate_selection(population,population_scores,size):
+def fitness_proportionate_selection(population,score_function,size):
+    population_scores = score_function(population)
     new_population = []
     fitness_total = sum(population_scores)
+    if fitness_total == 0:  #avoids division by 0 if no mutations yet
+        return population
     population_tuples = list(zip(population,population_scores))
     population_tuples.sort(reverse=True,key=lambda e: e[1])
 
@@ -85,6 +88,6 @@ def fitness_proportionate_selection(population,population_scores,size):
             break
         proportionate_value = math.ceil((individual[1]/fitness_total)*size)
         for x in range(proportionate_value):
-            new_population.append(individual)
+            new_population.append(individual[0])
         current += proportionate_value
     return new_population
